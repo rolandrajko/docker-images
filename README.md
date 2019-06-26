@@ -1,1 +1,2 @@
-# symfony
+# NGINX+PHP-FPM for Symfony 4
+Work in progress...
