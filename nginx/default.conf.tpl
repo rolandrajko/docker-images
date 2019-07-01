@@ -32,7 +32,7 @@ server {
   }
 
   location ~ $NGINX_PHP_LOCATION {
-    fastcgi_pass php:9000;
+    fastcgi_pass $NGINX_FCGI_ADDRESS;
     fastcgi_split_path_info ^(.+\.php)(/.*)$;
     fastcgi_hide_header X-Powered-By;
     include fastcgi_params;
