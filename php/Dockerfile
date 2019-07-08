@@ -54,10 +54,14 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 COPY symfony.ini /usr/local/etc/php/conf.d/
 COPY zz-www.conf /usr/local/etc/php-fpm.d/
+
 COPY docker-entrypoint.sh /usr/local/bin/
+COPY docker-secrets.sh /usr/local/bin/
 
 RUN mkdir -p var/cache var/log \
-    && chmod +x /usr/local/bin/docker-entrypoint.sh
+    && chmod +x \
+        /usr/local/bin/docker-entrypoint.sh \
+        /usr/local/bin/docker-secrets.sh
 
 VOLUME /var/www/html/var
 
