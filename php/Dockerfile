@@ -12,6 +12,7 @@ RUN apt-get update \
         git \
         mysql-client \
         unzip \
+    && apt-get install -y libfcgi0ldbl \
     && rm -rf /var/lib/apt/lists/*
 
 RUN DEBIAN_FRONTEND=noninteractive \
@@ -64,6 +65,10 @@ RUN mkdir -p var/cache var/log \
         /usr/local/bin/docker-secrets.sh
 
 VOLUME /var/www/html/var
+
+HEALTHCHECK --interval=30s --timeout=15s --start-period=30s --retries=10 \
+    CMD SCRIPT_NAME=/status SCRIPT_FILENAME=/status QUERY_STRING=full REQUEST_METHOD=GET \
+        /usr/bin/cgi-fcgi -bind -connect 127.0.0.1:9000
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["php-fpm"]
