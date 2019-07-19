@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:7.3-fpm-stretch
 
 RUN sed -i \
     -e "s/^# \(export LS_OPTIONS='--color=auto'\)/\1/g" \
@@ -10,7 +10,7 @@ RUN apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y \
         acl \
         git \
-        mariadb-client \
+        mysql-client \
         unzip \
     && apt-get install -y libfcgi0ldbl \
     && rm -rf /var/lib/apt/lists/*
