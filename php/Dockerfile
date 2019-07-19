@@ -10,7 +10,7 @@ RUN apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y \
         acl \
         git \
-        mysql-client \
+        mariadb-client \
         unzip \
     && apt-get install -y libfcgi0ldbl \
     && rm -rf /var/lib/apt/lists/*
