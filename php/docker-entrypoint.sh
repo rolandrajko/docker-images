@@ -5,9 +5,9 @@ if [ "${1#-}" != "$1" ]; then
     set -- php-fpm "$@"
 fi
 
-if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
+if [[ "$1" = 'php-fpm' ]] || [[ "$1" =~ '^bin/' ]]; then
     PHP_INI_RECOMMENDED="$PHP_INI_DIR/php.ini-production"
-    if [ "$APP_ENV" != 'prod' ] && [ "$APP_ENV" != 'stage' ]; then
+    if [[ ! "$APP_ENV" =~ 'prod|stage' ]]; then
         PHP_INI_RECOMMENDED="$PHP_INI_DIR/php.ini-development"
     fi
     ln -sf "$PHP_INI_RECOMMENDED" "$PHP_INI_DIR/php.ini"
@@ -18,7 +18,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
 
     source docker-secrets.sh
 
-    if [ "$APP_ENV" != 'prod' ] && [ "$APP_ENV" != 'stage' ]; then
+    if [[ ! "$APP_ENV" =~ 'prod|stage' ]]; then
         composer install --ansi --prefer-dist --no-progress --no-suggest --no-interaction
     else
         composer run-script --no-dev post-install-cmd
