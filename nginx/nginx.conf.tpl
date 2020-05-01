@@ -80,6 +80,35 @@ http {
   # Compress files on the fly before transmitting.
   # Compressed files are then decompressed by the browsers that support it.
   gzip on;
+  gzip_buffers 16 8k;
+  gzip_comp_level 9;
+  gzip_disable "msie6";
+  gzip_min_length 128;
+  gzip_proxied any;
+  gzip_types
+    application/javascript
+    application/json
+    application/rss+xml
+    application/vnd.ms-fontobject
+    application/x-font
+    application/x-font-opentype
+    application/x-font-otf
+    application/x-font-truetype
+    application/x-font-ttf
+    application/x-javascript
+    application/xhtml+xml
+    application/xml
+    application/xml+rss
+    font/opentype
+    font/otf
+    font/ttf
+    image/svg+xml
+    image/x-icon
+    text/css
+    text/javascript
+    text/plain
+    text/xml;
+  gzip_vary on;
 
   # These directives responsible for the time a server will wait for a client body or client header to be sent after request.
   #client_body_timeout   3m;
