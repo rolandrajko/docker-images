@@ -37,14 +37,20 @@ RUN DEBIAN_FRONTEND=noninteractive \
         zip \
     && pecl install \
         apcu \
-        redis \
-    && pecl clear-cache \
+        igbinary \
+    && pecl bundle redis \
+    && cd redis \
+    && phpize \
+    && ./configure --enable-redis-igbinary --enable-redis-lzf \
+    && make \
+    && make install \
     && docker-php-ext-enable \
         apcu \
+        igbinary \
         opcache \
         redis \
     && ln -s $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /var/www/html/*
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /tmp
