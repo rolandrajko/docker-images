@@ -12,7 +12,7 @@ server {
   add_header Access-Control-Allow-Origin $cors_origin always;
   add_header Access-Control-Allow-Credentials 'true' always;
   add_header Access-Control-Allow-Methods 'GET, POST, PUT, PATCH, DELETE, OPTIONS' always;
-  add_header Access-Control-Allow-Headers 'Accept,Authorization,Cache-Control,Content-Range,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,Range,User-Agent,X-Action,X-CustomHeader,X-Requested-With' always;
+  add_header Access-Control-Allow-Headers 'Accept,Authorization,Cache-Control,Content-Disposition,Content-Range,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,Range,User-Agent,X-Action,X-CustomHeader,X-Requested-With' always;
   add_header Access-Control-Expose-Headers 'Location' always;
 
   if ($request_method = 'OPTIONS') {
