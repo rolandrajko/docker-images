@@ -11,6 +11,7 @@ RUN apt-get update \
         acl \
         git \
         unzip \
+    && apt-get install -y libfcgi0ldbl \
     && rm -rf /var/lib/apt/lists/*
 
 RUN DEBIAN_FRONTEND=noninteractive \
