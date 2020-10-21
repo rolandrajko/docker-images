@@ -31,6 +31,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
         exif \
         gd \
         intl \
+        pcntl \
         pdo_mysql \
         soap \
         sockets \
