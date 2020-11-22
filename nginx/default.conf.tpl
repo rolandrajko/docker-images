@@ -12,8 +12,8 @@ server {
   add_header Access-Control-Allow-Origin $cors_origin always;
   add_header Access-Control-Allow-Credentials 'true' always;
   add_header Access-Control-Allow-Methods 'GET, POST, PUT, PATCH, DELETE, OPTIONS' always;
-  add_header Access-Control-Allow-Headers 'Accept,Authorization,Cache-Control,Content-Range,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,Range,User-Agent,X-Action,X-CustomHeader,X-Requested-With' always;
-  add_header Access-Control-Expose-Headers 'Content-Disposition,Location' always;
+  add_header Access-Control-Allow-Headers 'Accept,Authorization,Cache-Control,Content-Range,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,Range,Signature,User-Agent,X-Action,X-CustomHeader,X-Requested-With' always;
+  add_header Access-Control-Expose-Headers 'Content-Disposition,Location,Payment-URL' always;
 
   if ($request_method = 'OPTIONS') {
     #add_header Access-Control-Max-Age 1728000;
