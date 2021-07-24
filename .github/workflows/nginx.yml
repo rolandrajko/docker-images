@@ -17,5 +17,5 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./nginx
-        push: false
+        push: true
         tags: rolandrajko/symfony-nginx

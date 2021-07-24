@@ -17,5 +17,5 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./php
-        push: false
+        push: true
         tags: rolandrajko/symfony-php
