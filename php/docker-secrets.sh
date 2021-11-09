@@ -20,4 +20,4 @@ file_env() {
 
 while read -r envVar; do
     file_env "${envVar%_FILE}"
-done < <(printenv | cut -d'=' -f1 | grep '_FILE$')
+done < <(printenv | cut -d'=' -f1 | grep -P ${DS_PATTERN:-'_FILE$'})
