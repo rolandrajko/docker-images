@@ -10,8 +10,9 @@ export NGINX_INTERNAL=${NGINX_INTERNAL:-'internal;'}
 export NGINX_ORIGIN=${NGINX_ORIGIN:-'localhost'}
 export NGINX_PHP_FALLBACK=${NGINX_PHP_FALLBACK:-'/index.php'}
 export NGINX_PHP_LOCATION=${NGINX_PHP_LOCATION:-'^/index\.php(/|$)'}
+export NGINX_WORKER_CONN=$((`ulimit -n` / 1024))
 
-envsubst '${NGINX_CIDR}' \
+envsubst '${NGINX_CIDR} ${NGINX_WORKER_CONN}' \
     < /etc/nginx/nginx.conf.tpl > /etc/nginx/nginx.conf
 
 envsubst '${NGINX_DOC_ROOT} ${NGINX_FCGI_ADDRESS} ${NGINX_INTERNAL} ${NGINX_ORIGIN} ${NGINX_PHP_FALLBACK} ${NGINX_PHP_LOCATION}' \

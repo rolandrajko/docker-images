@@ -2,7 +2,7 @@ user nginx;
 
 # 1 worker process per CPU core.
 # Check max: $ grep processor /proc/cpuinfo | wc -l
-worker_processes 1;
+worker_processes auto;
 
 error_log /var/log/nginx/error.log warn;
 pid       /var/run/nginx.pid;
@@ -11,7 +11,7 @@ events {
   # Tells worker processes how many people can be served simultaneously.
   # worker_process (1) * worker_connections (1024) = 1024
   # Check max: $ ulimit -n
-  worker_connections 1024;
+  worker_connections $NGINX_WORKER_CONN;
 
   # Connection processing method. The epoll is efficient method used on Linux 2.6+
   use epoll;
