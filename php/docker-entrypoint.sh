@@ -1,5 +1,17 @@
 #!/bin/bash -e
 
+set_up_pm() {
+    local cpu_cores=${FPM_CPU_CORES:-1}
+    local total_ram=${FPM_TOTAL_RAM:-1024}
+    local process_size=${FPM_PROCESS_SIZE:-32}
+    export FPM_MAX_CHILDREN=$(($total_ram / $process_size))
+    export FPM_MIN_SERVERS=$(($cpu_cores * 2))
+    export FPM_MAX_SERVERS=$(($cpu_cores * 4))
+    envsubst < zz-www.conf > zz-www.conf.tmp && mv zz-www.conf.tmp zz-www.conf
+}
+
+set_up_pm
+
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
     set -- php-fpm "$@"
