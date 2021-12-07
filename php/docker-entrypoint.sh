@@ -7,7 +7,8 @@ set_up_pm() {
     export FPM_MAX_CHILDREN=$(($total_ram / $process_size))
     export FPM_MIN_SERVERS=$(($cpu_cores * 2))
     export FPM_MAX_SERVERS=$(($cpu_cores * 4))
-    envsubst < zz-www.conf > zz-www.conf.tmp && mv zz-www.conf.tmp zz-www.conf
+    local www_conf=/usr/local/etc/php-fpm.d/zz-www.conf
+    envsubst < $www_conf > /tmp/zz-www.conf && mv /tmp/zz-www.conf $www_conf
 }
 
 set_up_pm
