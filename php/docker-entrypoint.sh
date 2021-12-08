@@ -5,7 +5,7 @@ set_up_pm() {
     local total_ram=${FPM_TOTAL_RAM:-1024}
     local process_size=${FPM_PROCESS_SIZE:-32}
 
-    if [[ $(echo "${cpu_cores}<0.5" | bc) -eq 0 ]]; then
+    if [[ $(echo "${cpu_cores}<0.5" | bc) -eq 1 ]]; then
         echo 'Misconfiguration: $FPM_CPU_CORES should be greater than or equal to 0.5'
         exit 1
     fi
