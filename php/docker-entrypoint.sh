@@ -4,9 +4,21 @@ set_up_pm() {
     local cpu_cores=${FPM_CPU_CORES:-1}
     local total_ram=${FPM_TOTAL_RAM:-1024}
     local process_size=${FPM_PROCESS_SIZE:-32}
+
+    if [[ $(bc <<< ${cpu_cores}<0.5) -eq 0 ]]; then
+        echo 'Misconfiguration: $FPM_CPU_CORES should be greater than or equal to 0.5'
+        exit 1
+    fi
+
     export FPM_MAX_CHILDREN=$(($total_ram / $process_size))
-    export FPM_MIN_SERVERS=$(($cpu_cores * 2))
-    export FPM_MAX_SERVERS=$(($cpu_cores * 4))
+    export FPM_MIN_SERVERS=$(bc <<< ${cpu_cores}*2/1)
+    export FPM_MAX_SERVERS=$(bc <<< ${cpu_cores}*4/1)
+
+    if [[ $FPM_MAX_SERVERS -gt $FPM_MAX_CHILDREN ]]; then
+        echo 'Misconfiguration: $FPM_TOTAL_RAM / $FPM_PROCESS_SIZE should be greater than or equal to $FPM_CPU_CORES * 4'
+        exit 1
+    fi
+
     local www_conf=/usr/local/etc/php-fpm.d/zz-www.conf
     envsubst < $www_conf > /tmp/zz-www.conf && mv /tmp/zz-www.conf $www_conf
 }

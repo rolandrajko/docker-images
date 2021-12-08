@@ -9,6 +9,7 @@ RUN sed -i \
 RUN apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y \
         acl \
+        bc \
         gettext-base \
         git \
         unzip \
