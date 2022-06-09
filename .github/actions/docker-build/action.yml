@@ -20,12 +20,7 @@ runs:
         platforms: amd64,arm64
 
     - name: Set up Docker Buildx
-      id: buildx
       uses: docker/setup-buildx-action@v2
-
-    - name: Available Platforms
-      shell: bash
-      run: echo ${{ steps.buildx.outputs.platforms }}
 
     - name: Login to Docker Hub
       uses: docker/login-action@v2
@@ -40,7 +35,7 @@ runs:
         context: ${{ inputs.context }}
         platforms: linux/amd64,linux/arm64
         push: true
-        tags: ${{ inputs.username }}/${{ inputs.context }}:latest
+        tags: ${{ github.repository_owner }}/${{ inputs.context }}:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
@@ -51,4 +46,4 @@ runs:
         context: ${{ inputs.context }}
         platforms: linux/amd64,linux/arm64
         push: true
-        tags: ${{ inputs.username }}/${{ inputs.context }}:latest
+        tags: ${{ github.repository_owner }}/${{ inputs.context }}:latest
