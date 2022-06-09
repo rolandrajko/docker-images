@@ -2,7 +2,7 @@ name: img2pdf
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
     paths:
     - '.github/actions/docker-build/**'
     - '.github/workflows/img2pdf.yml'
