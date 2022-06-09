@@ -25,3 +25,5 @@ jobs:
       with:
         cache: 'true'
         context: symfony-php
+        token: ${{ secrets.DOCKERHUB_TOKEN }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
