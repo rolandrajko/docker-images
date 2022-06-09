@@ -1,4 +1,4 @@
-FROM debian:10-slim
+FROM debian:11-slim
 
 RUN DEBIAN_FRONTEND=noninteractive && \
     apt update && \
