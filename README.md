@@ -1,2 +1,1 @@
-# NGINX+PHP-FPM for Symfony 4
-Work in progress...
+# Docker Images
