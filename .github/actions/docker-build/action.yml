@@ -20,6 +20,7 @@ runs:
       uses: docker/setup-buildx-action@v2
 
     - name: Available Platforms
+      shell: bash
       run: echo ${{ steps.buildx.outputs.platforms }}
 
     - name: Login to Docker Hub
