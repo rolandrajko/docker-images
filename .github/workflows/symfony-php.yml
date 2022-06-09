@@ -1,0 +1,31 @@
+name: symfony-php
+
+on:
+  pull_request:
+    types: [ opened, synchronize ]
+    paths:
+    - .github/actions/docker-build/*
+    - .github/workflows/symfony-php.yml
+    - symfony-php/*
+  schedule:
+  - cron: '15 7 * * 1/14'
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Build & Push Docker Image
+      uses: ./.github/actions/docker-build
+      with:
+        cache: 'true'
+        context: symfony-php
+        token: ${{ secrets.DOCKERHUB_TOKEN }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}

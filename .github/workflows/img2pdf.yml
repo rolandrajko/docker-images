@@ -1,0 +1,23 @@
+name: img2pdf
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - .github/actions/docker-build/*
+    - .github/workflows/img2pdf.yml
+    - img2pdf/*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Build & Push Docker Image
+      uses: ./.github/actions/docker-build
+      with:
+        context: img2pdf
+        token: ${{ secrets.DOCKERHUB_TOKEN }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}

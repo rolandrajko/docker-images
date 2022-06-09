@@ -1,0 +1,20 @@
+name: symfony-nginx
+
+on:
+  schedule:
+  - cron: '15 7 1,15 * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Build & Push Docker Image
+      uses: ./.github/actions/docker-build
+      with:
+        context: symfony-nginx
+        token: ${{ secrets.DOCKERHUB_TOKEN }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
