@@ -27,5 +27,6 @@ jobs:
       with:
         cache: 'true'
         context: symfony-php
+        tags: ${{ github.repository_owner }}/symfony-php:latest
         token: ${{ secrets.DOCKERHUB_TOKEN }}
         username: ${{ secrets.DOCKERHUB_USERNAME }}

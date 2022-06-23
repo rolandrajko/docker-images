@@ -19,5 +19,6 @@ jobs:
       uses: ./.github/actions/docker-build
       with:
         context: img2pdf
+        tags: ${{ github.repository_owner }}/img2pdf:latest
         token: ${{ secrets.DOCKERHUB_TOKEN }}
         username: ${{ secrets.DOCKERHUB_USERNAME }}

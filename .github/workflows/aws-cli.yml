@@ -1,0 +1,24 @@
+name: aws-cli
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Find & Set Latest Version
+      run: echo "latest_version=$(curl -sL https://api.github.com/repos/aws/aws-cli/git/refs/tags | jq -r '.[].ref' | grep -oP '1\.\d+\.\d+' | tail -n 1)" >> $GITHUB_ENV
+
+    - name: Build & Push Docker Image
+      uses: ./.github/actions/docker-build
+      with:
+        context: aws-cli
+        tags: |
+          ${{ github.repository_owner }}/aws-cli:${{ env.latest_version }}
+          ${{ github.repository_owner }}/aws-cli:latest
+        token: ${{ secrets.DOCKERHUB_TOKEN }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
