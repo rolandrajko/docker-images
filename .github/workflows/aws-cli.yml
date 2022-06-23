@@ -1,6 +1,12 @@
 name: aws-cli
 
 on:
+  pull_request:
+    types: [ opened, synchronize ]
+    paths:
+    - '.github/actions/docker-build/**'
+    - '.github/workflows/aws-cli.yml'
+    - 'aws-cli/**'
   workflow_dispatch:
 
 jobs:
