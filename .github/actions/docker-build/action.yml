@@ -49,11 +49,3 @@ runs:
         platforms: linux/amd64,linux/arm64
         push: true
         tags: ${{ inputs.tags }}
-
-    - name: Update repo description
-      uses: peter-evans/dockerhub-description@v3
-      with:
-        username: ${{ inputs.username }}
-        password: ${{ inputs.token }}
-        repository: ${{ github.repository_owner }}/${{ inputs.context }}
-        readme-filepath: ${{ inputs.context }}/README.md
