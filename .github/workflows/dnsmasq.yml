@@ -1,4 +1,4 @@
-name: aws-cli
+name: dnsmasq
 
 on:
   pull_request:
@@ -14,9 +14,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-
-    - name: Find & Set Latest Version
-      run: echo "latest_version=$(curl -sL https://api.github.com/repos/aws/aws-cli/git/refs/tags | jq -r '.[].ref' | grep -oP '1\.\d+\.\d+' | tail -n 1)" >> $GITHUB_ENV
 
     - name: Build & Push Docker Image
       uses: ./.github/actions/docker-build

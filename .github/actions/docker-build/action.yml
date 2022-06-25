@@ -51,7 +51,7 @@ runs:
         tags: ${{ inputs.tags }}
 
     - name: Update repo description
-      uses: peter-evans/dockerhub-description@v2
+      uses: peter-evans/dockerhub-description@v3
       with:
         username: ${{ inputs.username }}
         password: ${{ inputs.token }}
