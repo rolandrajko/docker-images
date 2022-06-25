@@ -1,19 +1,12 @@
-name: symfony-php
+name: dnsmasq
 
 on:
   pull_request:
     types: [ opened, synchronize ]
     paths:
     - '.github/actions/docker-build/**'
-    - '.github/workflows/symfony-php.yml'
-    - 'symfony-php/**'
-  schedule:
-  - cron: '15 7 * * 1/14'
-  workflow_dispatch:
-
-defaults:
-  run:
-    shell: bash
+    - '.github/workflows/dnsmasq.yml'
+    - 'dnsmasq/**'
 
 jobs:
   build:
@@ -25,8 +18,7 @@ jobs:
     - name: Build & Push Docker Image
       uses: ./.github/actions/docker-build
       with:
-        cache: 'true'
-        context: symfony-php
-        tags: ${{ github.repository_owner }}/symfony-php:latest
+        context: dnsmasq
+        tags: ${{ github.repository_owner }}/dnsmasq:latest
         token: ${{ secrets.DOCKERHUB_TOKEN }}
         username: ${{ secrets.DOCKERHUB_USERNAME }}

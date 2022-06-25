@@ -16,5 +16,6 @@ jobs:
       uses: ./.github/actions/docker-build
       with:
         context: symfony-nginx
+        tags: ${{ github.repository_owner }}/symfony-nginx:latest
         token: ${{ secrets.DOCKERHUB_TOKEN }}
         username: ${{ secrets.DOCKERHUB_USERNAME }}
